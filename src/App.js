@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 
+// Validacion
 const validate = (values) => {
   const errors = {};
 
@@ -19,6 +20,7 @@ const validate = (values) => {
 };
 
 function App() {
+  // Configuracion de formik
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -32,39 +34,21 @@ function App() {
   return (
     <form onSubmit={formik.handleSubmit}>
       <label>Nombre</label>
-      <input
-        autoComplete='off'
-        name='name'
-        type='text'
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.name}
-      />
+      <input autoComplete='off' type='text' {...formik.getFieldProps("name")} />
+      {/* Mostrando errores */}
       {formik.touched.name && formik.errors.name ? (
         <div style={{ color: "red" }}>{formik.errors.name}</div>
       ) : null}
       <br />
       <label>Apellido</label>
-      <input
-        autoComplete='off'
-        name='lastname'
-        type='text'
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.lastname}
+      <input autoComplete='off' type='text' {...formik.getFieldProps("lastname")}
       />
       {formik.touched.lastname && formik.errors.lastname ? (
         <div style={{ color: "red" }}>{formik.errors.lastname}</div>
       ) : null}
       <br />
       <label>Email</label>
-      <input
-        autoComplete='off'
-        name='email'
-        type='email'
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.email}
+      <input autoComplete='off' type='email' {...formik.getFieldProps("email")}
       />
       {formik.touched.email && formik.errors.email ? (
         <div style={{ color: "red" }}>{formik.errors.email}</div>
