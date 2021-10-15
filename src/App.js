@@ -1,4 +1,4 @@
-import { useFormik } from "formik";
+import { Formik } from "formik";
 
 // Validacion
 const validate = (values) => {
@@ -20,41 +20,49 @@ const validate = (values) => {
 };
 
 function App() {
-  // Configuracion de formik
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      lastname: "",
-      email: "",
-    },
-    validate,
-    onSubmit: (values) => console.log(values),
-  });
-
+  // Configuracion de formik con componente
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label>Nombre</label>
-      <input autoComplete='off' type='text' {...formik.getFieldProps("name")} />
-      {/* Mostrando errores */}
-      {formik.touched.name && formik.errors.name ? (
-        <div style={{ color: "red" }}>{formik.errors.name}</div>
-      ) : null}
-      <br />
-      <label>Apellido</label>
-      <input autoComplete='off' type='text' {...formik.getFieldProps("lastname")}
-      />
-      {formik.touched.lastname && formik.errors.lastname ? (
-        <div style={{ color: "red" }}>{formik.errors.lastname}</div>
-      ) : null}
-      <br />
-      <label>Email</label>
-      <input autoComplete='off' type='email' {...formik.getFieldProps("email")}
-      />
-      {formik.touched.email && formik.errors.email ? (
-        <div style={{ color: "red" }}>{formik.errors.email}</div>
-      ) : null}
-      <button type='submit'>Enviar</button>
-    </form>
+    <Formik
+      initialValues={{ name: "", lastname: "", email: "" }}
+      validate={validate}
+      onSubmit={(values) => console.log(values)}
+    >
+      {(formik) => (
+        <form onSubmit={formik.handleSubmit}>
+          <label>Nombre</label>
+          <input
+            autoComplete='off'
+            type='text'
+            {...formik.getFieldProps("name")}
+          />
+          {/* Mostrando errores */}
+          {formik.touched.name && formik.errors.name ? (
+            <div style={{ color: "red" }}>{formik.errors.name}</div>
+          ) : null}
+          <br />
+          <label>Apellido</label>
+          <input
+            autoComplete='off'
+            type='text'
+            {...formik.getFieldProps("lastname")}
+          />
+          {formik.touched.lastname && formik.errors.lastname ? (
+            <div style={{ color: "red" }}>{formik.errors.lastname}</div>
+          ) : null}
+          <br />
+          <label>Email</label>
+          <input
+            autoComplete='off'
+            type='email'
+            {...formik.getFieldProps("email")}
+          />
+          {formik.touched.email && formik.errors.email ? (
+            <div style={{ color: "red" }}>{formik.errors.email}</div>
+          ) : null}
+          <button type='submit'>Enviar</button>
+        </form>
+      )}
+    </Formik>
   );
 }
 
