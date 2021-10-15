@@ -1,4 +1,4 @@
-import { Formik } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 // Validacion
 const validate = (values) => {
@@ -27,41 +27,20 @@ function App() {
       validate={validate}
       onSubmit={(values) => console.log(values)}
     >
-      {(formik) => (
-        <form onSubmit={formik.handleSubmit}>
-          <label>Nombre</label>
-          <input
-            autoComplete='off'
-            type='text'
-            {...formik.getFieldProps("name")}
-          />
-          {/* Mostrando errores */}
-          {formik.touched.name && formik.errors.name ? (
-            <div style={{ color: "red" }}>{formik.errors.name}</div>
-          ) : null}
-          <br />
-          <label>Apellido</label>
-          <input
-            autoComplete='off'
-            type='text'
-            {...formik.getFieldProps("lastname")}
-          />
-          {formik.touched.lastname && formik.errors.lastname ? (
-            <div style={{ color: "red" }}>{formik.errors.lastname}</div>
-          ) : null}
-          <br />
-          <label>Email</label>
-          <input
-            autoComplete='off'
-            type='email'
-            {...formik.getFieldProps("email")}
-          />
-          {formik.touched.email && formik.errors.email ? (
-            <div style={{ color: "red" }}>{formik.errors.email}</div>
-          ) : null}
-          <button type='submit'>Enviar</button>
-        </form>
-      )}
+      <Form>
+        <label>Nombre</label>
+        <Field autoComplete='off' name='name' type='text' />
+        <ErrorMessage name='name' />
+        <br />
+        <label>Apellido</label>
+        <Field autoComplete='off' name='lastname' type='text' />
+        <ErrorMessage name='lastname' />
+        <br />
+        <label>Email</label>
+        <Field autoComplete='off' name='email' type='email' />
+        <ErrorMessage name='email' />
+        <button type='submit'>Enviar</button>
+      </Form>
     </Formik>
   );
 }
