@@ -13,7 +13,7 @@ const styles = {
 const TextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
-  console.log({ field, meta });
+//   console.log({ field, meta });
   return (
     <div>
       <label style={styles.label}>{label}</label>

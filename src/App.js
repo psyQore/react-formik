@@ -1,4 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import Checkbox from "./components/Checkbox";
 import TextInput from "./components/TextInput";
 
 const styles = {
@@ -61,6 +62,9 @@ function App() {
         <label style={styles.label}>Email</label>
         <Field autoComplete='off' name='email' type='email' />
         <ErrorMessage name='email' />
+        <Checkbox name="accept">
+            Aceptar Terminos y Condiciones
+        </Checkbox>
         <button type='submit'>Enviar</button>
       </Form>
     </Formik>
