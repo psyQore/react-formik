@@ -1,8 +1,12 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import TextInput from "./components/TextInput";
 
 const styles = {
   error: {
     color: "#ff0000",
+  },
+  label: {
+    color: "#fff",
   },
 };
 
@@ -34,26 +38,27 @@ function App() {
       onSubmit={(values) => console.log(values)}
     >
       <Form>
-        <label>Nombre</label>
-        <Field autoComplete='off' name='name' type='text' />
+        <TextInput name='name' label='Nombre' />
+        {/* <label style={styles.label}>Nombre</label>
+        <Field autoComplete='off' name='name' type='text' /> */}
         <br />
-        <Field autoComplete='off' name='option' as='select'>
-          <option >-- Seleccionar ---</option>
+        {/* <Field autoComplete='off' name='option' as='select'>
+          <option>-- Seleccionar ---</option>
           <option value='Opcion 1'>Opcion 1</option>
           <option value='Opcion 2'>Opcion 2</option>
           <option value='Opcion 3'>Opcion 3</option>
           <option value='Opcion 4'>Opcion 4</option>
-        </Field>
-        <ErrorMessage
+        </Field> */}
+        {/* <ErrorMessage
           name='name'
           render={(msg) => <div style={styles.error}>{msg}</div>}
-        />
+        /> */}
         <br />
-        <label>Apellido</label>
+        <label style={styles.label}>Apellido</label>
         <Field autoComplete='off' name='lastname' type='text' />
         <ErrorMessage name='lastname' />
         <br />
-        <label>Email</label>
+        <label style={styles.label}>Email</label>
         <Field autoComplete='off' name='email' type='email' />
         <ErrorMessage name='email' />
         <button type='submit'>Enviar</button>
