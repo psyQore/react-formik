@@ -1,6 +1,8 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 import Checkbox from "./components/Checkbox";
+import Radio from "./components/Radio";
 import TextInput from "./components/TextInput";
+import Select from "./components/Select";
 
 const styles = {
   error: {
@@ -27,6 +29,10 @@ const validate = (values) => {
     errors.lastname = "El apellido es muy corto";
   }
 
+  if(!values.radio){
+    errors.radio = "Requerido"
+  }
+
   return errors;
 };
 
@@ -34,37 +40,29 @@ function App() {
   // Configuracion de formik con componente
   return (
     <Formik
-      initialValues={{ name: "", lastname: "", option: "", email: "" }}
+      initialValues={{ name: "", lastname: "", email: "", sex: "", radio : "" }}
       validate={validate}
       onSubmit={(values) => console.log(values)}
     >
       <Form>
         <TextInput name='name' label='Nombre' />
-        {/* <label style={styles.label}>Nombre</label>
-        <Field autoComplete='off' name='name' type='text' /> */}
         <br />
-        {/* <Field autoComplete='off' name='option' as='select'>
-          <option>-- Seleccionar ---</option>
-          <option value='Opcion 1'>Opcion 1</option>
-          <option value='Opcion 2'>Opcion 2</option>
-          <option value='Opcion 3'>Opcion 3</option>
-          <option value='Opcion 4'>Opcion 4</option>
-        </Field> */}
-        {/* <ErrorMessage
-          name='name'
-          render={(msg) => <div style={styles.error}>{msg}</div>}
-        /> */}
+        <TextInput name='lastname' label='Apellido' />
         <br />
-        <label style={styles.label}>Apellido</label>
-        <Field autoComplete='off' name='lastname' type='text' />
-        <ErrorMessage name='lastname' />
-        <br />
-        <label style={styles.label}>Email</label>
-        <Field autoComplete='off' name='email' type='email' />
-        <ErrorMessage name='email' />
-        <Checkbox name="accept">
-            Aceptar Terminos y Condiciones
+        <TextInput name='email' label='Correo' />
+        <Select label='Sexo' name='sex'>
+          <option value=''>Seleccione su sexo</option>
+          <option value='hombre'>Hombre</option>
+          <option value='mujer'>Mujer</option>
+          <option value='otro'>Otro</option>
+        </Select>
+        <Checkbox name='accept' style={styles.label}>
+          Aceptar Terminos y Condiciones
         </Checkbox>
+        <Radio name='radio' value='pega1' label='pega 1' />
+        <Radio name='radio' value='pega2' label='pega 2' />
+        <Radio name='radio' value='pega3' label='pega 3' />
+        <ErrorMessage name="radio" />
         <button type='submit'>Enviar</button>
       </Form>
     </Formik>

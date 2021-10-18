@@ -1,14 +1,7 @@
 import { useField } from "formik";
 import React from "react";
 
-const styles = {
-  error: {
-    color: "#ff0000",
-  },
-  label: {
-    color: "#fff",
-  },
-};
+
 
 const TextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -16,10 +9,10 @@ const TextInput = ({ label, ...props }) => {
 //   console.log({ field, meta });
   return (
     <div>
-      <label style={styles.label}>{label}</label>
+      <label>{label}</label>
       <input type='text' {...field} />
       {meta.touched && meta.error ? (
-        <div style={styles.error}>{meta.error}</div>
+        <div>{meta.error}</div>
       ) : null}
     </div>
   );
